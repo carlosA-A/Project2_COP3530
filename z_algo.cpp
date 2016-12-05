@@ -59,7 +59,7 @@ class ZAlgorithm
         vector<int> calculateZ (string input,string pattern)
         {
             vector<int> Z (input.length());
-            vactor <int> pattern_occur;
+            vector <int> pattern_occur;
             int left = 0;
             int right = 0;
             for(int k = 1; k < input.length(); k++)
@@ -87,7 +87,7 @@ class ZAlgorithm
                     if (Z[k1]<right - k+1)
                     {
                         Z[k] = Z[k1];
-                        if(Z[k1]==pattern.lenth())
+                        if(Z[k1]==pattern.length())
                         {
                         
                             pattern_occur.push_back(pattern.length());
@@ -116,7 +116,7 @@ class ZAlgorithm
             
             
             }
-            return Z;
+            return pattern_occur;
         
         }
 
@@ -128,15 +128,7 @@ class ZAlgorithm
             vector <int> Z = calculateZ(new_string,pattern); 
             int pattern_occurance = 0;
 
-            for(int i= 0;i < Z.size();i++)
-            {
-                if(Z[i] == pattern.length())
-                {
-                    pattern_occurance++;
-                }
-            
-            }
-            return pattern_occurance;
+            return Z.size();
         }
 
 
@@ -188,7 +180,7 @@ int main()
         sequence_col+= to_string(zAlgorithm->match_pattern(column,hint));
     
     }
-    cout<<printlcs(sequence_row,sequence_col);
+    cout<<printlcs(sequence_row,sequence_col)<<endl;
 
 
     return 0;
