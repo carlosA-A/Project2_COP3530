@@ -32,10 +32,10 @@ class Solution
                     if(right-left == pattern.length())
                     {
                         pattern_occur.push_back(pattern.length());
-                    
+
                     }
                     right--;
-                
+
                 }
                 else
                 {
@@ -45,11 +45,11 @@ class Solution
                         Z[k] = Z[k1];
                         if(Z[k1]==pattern.length())
                         {
-                        
+
                             pattern_occur.push_back(pattern.length());
-                        
+
                         }
-                    
+
                     }
                     else
                     {
@@ -65,15 +65,15 @@ class Solution
 
                         }
                         right--;
-                    
+
                     }
-                
+
                 }
-            
-            
+
+
             }
             return pattern_occur;
-        
+
         }
 
         int match_pattern(string text, string pattern)
@@ -82,11 +82,10 @@ class Solution
             string new_string = pattern+"$"+text;
             vector<int> result;
             vector <int> Z = calculateZ(new_string,pattern); 
-            int pattern_occurance = 0;
 
             return Z.size();
         }
-
+        //Print LCS function
 
         string printlcs(string s1,string s2)
         {
@@ -94,6 +93,7 @@ class Solution
             m=s1.size(),n=s2.size();
             vector< vector< pair<int,string> > >seq(m+1,vector< pair<int,string> > (n+1,make_pair(0,"")));
             pair<int,string> pair_int_str;
+            //Create 2d matrix with table set to 0 and empty string by default
             for(int i=1;i<=m;i++)
             {
                 for(int j=1;j<=n;j++)
@@ -155,27 +155,28 @@ int main()
     {
         cin>>line;
         matrix.push_back(line);
-    
+
     }
     //Perform Z algorithm on the rows of the matrix
 
     for(string s:matrix)
     {
         sequence_row+= to_string(solution->match_pattern(s,hint));
-    
-    }
 
+    }
+    //Perform Z algorithm on each column
     for(int i = 0; i<n;i++)
     {
         column = "";
         for(int j = 0;j < n;j++)
         {
             column+= matrix[j][i];
-        
+
         }
         sequence_col+= to_string(solution->match_pattern(column,hint));
-    
+
     }
+    //print LCS
     cout<<solution->printlcs(sequence_row,sequence_col)<<endl;
 
 
