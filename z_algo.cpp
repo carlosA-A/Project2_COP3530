@@ -56,9 +56,10 @@ class ZAlgorithm
 
     public:
 
-        vector<int> calculateZ (string input)
+        vector<int> calculateZ (string input,string pattern)
         {
             vector<int> Z (input.length());
+            vactor <int> pattern_occur;
             int left = 0;
             int right = 0;
             for(int k = 1; k < input.length(); k++)
@@ -72,6 +73,11 @@ class ZAlgorithm
                         right++;
                     }
                     Z[k] = right - left;
+                    if(right-left == pattern.length())
+                    {
+                        pattern_occur.push_back(pattern.length());
+                    
+                    }
                     right--;
                 
                 }
@@ -81,6 +87,12 @@ class ZAlgorithm
                     if (Z[k1]<right - k+1)
                     {
                         Z[k] = Z[k1];
+                        if(Z[k1]==pattern.lenth())
+                        {
+                        
+                            pattern_occur.push_back(pattern.length());
+                        
+                        }
                     
                     }
                     else
@@ -91,6 +103,11 @@ class ZAlgorithm
                             right++;
                         }
                         Z[k] = right - left;
+                        if(right-left == pattern.length())
+                        {
+                            pattern_occur.push_back(pattern.length());
+
+                        }
                         right--;
                     
                     }
@@ -108,7 +125,7 @@ class ZAlgorithm
             //String used to start matching using Z algorithm, contains the pattern$text we are comparing
             string new_string = pattern+"$"+text;
             vector<int> result;
-            vector <int> Z = calculateZ(new_string); 
+            vector <int> Z = calculateZ(new_string,pattern); 
             int pattern_occurance = 0;
 
             for(int i= 0;i < Z.size();i++)
