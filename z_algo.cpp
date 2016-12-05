@@ -6,52 +6,8 @@ using namespace std;
 
 
 
-string printlcs(string s1,string s2)
-{
-    int m,n;
-    m=s1.size(),n=s2.size();
-    vector< vector< pair<int,string> > >dp(m+1,vector< pair<int,string> > (n+1,make_pair(0,"")));
-    pair<int,string> pp1;
-    for(int i=1;i<=m;i++)
-    {
-        for(int j=1;j<=n;j++)
-        {
-            if(s1[i-1]==s2[j-1])
-            {
-                pp1=dp[i-1][j-1];
-                int num=pp1.first+1;
-                string str=pp1.second+s1[i-1];
-                //Add spacing to sequence only if it's not the last element
-                if(j == n )
-                {
-                
-                    dp[i][j]=make_pair(num,str);
-                }
-                else
-                {
-                
-                    dp[i][j]=make_pair(num,str+" ");
-                
-                }
-            }
-            else
-            {
-                if(dp[i-1][j]>=dp[i][j-1])
-                {
-                    pp1=dp[i-1][j];
-                }
-                else
-                {
-                    pp1=dp[i][j-1];
-                }
-                dp[i][j]=pp1;
-            }
-        }
-    }
-    return dp[m][n].second;
-}
 
-class ZAlgorithm 
+class Solution
 {
 
     public:
@@ -132,10 +88,50 @@ class ZAlgorithm
         }
 
 
+        string printlcs(string s1,string s2)
+        {
+            int m,n;
+            m=s1.size(),n=s2.size();
+            vector< vector< pair<int,string> > >seq(m+1,vector< pair<int,string> > (n+1,make_pair(0,"")));
+            pair<int,string> pair_int_str;
+            for(int i=1;i<=m;i++)
+            {
+                for(int j=1;j<=n;j++)
+                {
+                    if(s1[i-1]==s2[j-1])
+                    {
+                        pair_int_str=seq[i-1][j-1];
+                        int num=pair_int_str.first+1;
+                        string str=pair_int_str.second+s1[i-1];
+                        //Add spacing to sequence only if it's not the last element
+                        if(j == n )
+                        {
 
+                            seq[i][j]=make_pair(num,str);
+                        }
+                        else
+                        {
 
+                            seq[i][j]=make_pair(num,str+" ");
 
-
+                        }
+                    }
+                    else
+                    {
+                        if(seq[i-1][j]>=seq[i][j-1])
+                        {
+                            pair_int_str=seq[i-1][j];
+                        }
+                        else
+                        {
+                            pair_int_str=seq[i][j-1];
+                        }
+                        seq[i][j]=pair_int_str;
+                    }
+                }
+            }
+            return seq[m][n].second;
+        }
 };
 
 
@@ -150,7 +146,7 @@ int main()
     string sequence_col="";
     vector<string> matrix;
 
-    ZAlgorithm *zAlgorithm = new ZAlgorithm();
+    Solution *solution = new Solution();
 
     cin>>hint;
     cin>>n;
@@ -165,7 +161,7 @@ int main()
 
     for(string s:matrix)
     {
-        sequence_row+= to_string(zAlgorithm->match_pattern(s,hint));
+        sequence_row+= to_string(solution->match_pattern(s,hint));
     
     }
 
@@ -177,10 +173,10 @@ int main()
             column+= matrix[j][i];
         
         }
-        sequence_col+= to_string(zAlgorithm->match_pattern(column,hint));
+        sequence_col+= to_string(solution->match_pattern(column,hint));
     
     }
-    cout<<printlcs(sequence_row,sequence_col)<<endl;
+    cout<<solution->printlcs(sequence_row,sequence_col)<<endl;
 
 
     return 0;
