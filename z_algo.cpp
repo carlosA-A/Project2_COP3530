@@ -12,19 +12,19 @@ class Solution
 
     public:
 
-        vector<int> calculateZ (string input,string pattern)
+        vector<int> calculateZ (string z_string,string pattern)
         {
-            vector<int> Z (input.length());
+            vector<int> Z (z_string.length());
             vector <int> pattern_occur;
             int left = 0;
             int right = 0;
-            for(int k = 1; k < input.length(); k++)
+            for(int k = 1; k < z_string.length(); k++)
             {
                 if(k > right)
                 {
 
                     left = right = k;
-                    while (right < input.length() && input[right] == input[right-left])
+                    while (right < z_string.length() && z_string[right] == z_string[right-left])
                     {
                         right++;
                     }
@@ -54,7 +54,7 @@ class Solution
                     else
                     {
                         left = k;
-                        while (right < input.length() && input[right] == input[right-left])
+                        while (right < z_string.length() && z_string[right] == z_string[right-left])
                         {
                             right++;
                         }
